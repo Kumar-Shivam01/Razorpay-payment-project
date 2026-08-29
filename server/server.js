@@ -2,9 +2,15 @@ const express = require('express');
 const mongoose = require('mongoose');
 const paymentRoutes = require('./routes/paymentRoutes')
 const dotenv = require('dotenv').config();
+const cors = require('cors')
 const port = 3001;
 const app = express();
+app.use(cors({ //configuring cors to allow requests from frontend
+    origin: 'http://localhost:5173',
+    methods: ['GET','POST']
+}))
 mongoose.connect(process.env.MONGODB_CONN_STR)
+
 app.use(express.json());
 
 app.get('/',(req,res)=>{

@@ -28,3 +28,19 @@ exports.createOrder = async (req,res)=>{
 }
 
 // client-side signature check, backup verification
+exports.verifyPayment = async(req,res)=>{
+    try{
+        const {razorpay_order_id,razorpay_payment_id,razorpay_signature} = req.body;
+        const body = razorpay_order_id + '|' + razorpay_payment_id;
+        const expectedSignature = crypto.createHmac('sha256',process.env.RAZORPAY_KEY_SECRET).update(body).digest('hex')
+        if(expectedSignature === razorpay_signature){
+            await Order.findOneAndUpdate(
+                {razorpayOrderId: razorpay_order_id},
+                {status: 'paid',paymentId: razorpay_payment_id}
+            )
+            res.status(200).json({success:true,message:'Payment verified successfully'})
+        }
+    }catch(err){
+        return res.status(500).json({status:'failed',message:'Failed to verify payment',error:err.message})
+    }
+}

@@ -21,7 +21,8 @@ const orderSchema = new mongoose.Schema({
     },
     paymentId:{
         type: String,
-        unique: true
+        unique: true,
+        sparse: true
     }   
 })
 module.exports = mongoose.model('Order',orderSchema);
