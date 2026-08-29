@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import API from '../api/axios';
 import PaymentStatus from './PaymentStatus';
-
 const Product = () => {
   const [loading, setLoading] = useState(false);
   const [verifying, setVerifying] = useState(false);
@@ -22,7 +21,7 @@ const Product = () => {
     setVerificationResult(null);
 
     try {
-      // Step 1: Create Order via Backend API (/payment/create-order)
+      // Step 1: Creating Order via Backend API (/create-order)
       const { data } = await API.post('/payment/create-order', {
         amount: product.price,
         currency: product.currency,
@@ -34,10 +33,10 @@ const Product = () => {
 
       const { razorpayOrder } = data;
 
-      // Step 2: Configure Razorpay Options
+      // Step 2: Configuring Razorpay Options
       const options = {
-        key: 'YOUR_RAZORPAY_KEY_ID', // Replace with your Razorpay Key ID (e.g. rzp_test_xxxxx)
-        amount: razorpayOrder.amount, // Amount in paise
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+        amount: razorpayOrder.amount, 
         currency: razorpayOrder.currency,
         name: 'Razorpay Payment Store',
         description: product.title,
@@ -79,9 +78,9 @@ const Product = () => {
           }
         },
         prefill: {
-          name: 'Shivam Kumar',
+          name: 'Kumar shivam',
           email: 'shivam@example.com',
-          contact: '9876543210',
+          contact: '6205097362',
         },
         theme: {
           color: '#6366f1',
