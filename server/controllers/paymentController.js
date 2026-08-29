@@ -10,7 +10,7 @@ exports.createOrder = async (req,res)=>{
             currency,
             receipt: `receipt_order_${Date.now()}`
         })  
-        const order = await Order.create({
+        const order = await Order.create({  
             razorpayOrderId: razorpayOrder.id,
             amount,
             currency,
@@ -27,3 +27,4 @@ exports.createOrder = async (req,res)=>{
     }
 }
 
+// client-side signature check, backup verification
