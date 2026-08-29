@@ -8,9 +8,8 @@ function App() {
       <header className="app-header">
         <div className="brand">
           <div className="brand-icon">💳</div>
-          <span className="brand-title">Razorpay Pay</span>
+          <span className="brand-title">Razorpay Payment Gateway</span>
         </div>
-        <span className="badge">Razorpay SDK v1</span>
       </header>
 
       {/* Main Content Area */}
