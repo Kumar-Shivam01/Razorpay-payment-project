@@ -6,7 +6,8 @@ const cors = require('cors')
 const port = 3001;
 const app = express();
 app.use(cors({ //configuring cors to allow requests from frontend
-    origin: 'http://localhost:5173',
+    origin: ['http://localhost:5173', 'https://razorpay-payment-project.onrender.com'],
+    credentials: true,
     methods: ['GET','POST']
 }))
 mongoose.connect(process.env.MONGODB_CONN_STR)
