@@ -9,7 +9,7 @@ app.use(cors({
     origin: (origin, callback) => {
         const allowedOrigins = [
             'http://localhost:5173',
-            'https://razorpay-payment-project.onrender.com'
+            'https://razorpay-payment-project.vercel.app'
         ];
         if (!origin || allowedOrigins.includes(origin) || /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)) {
             return callback(null, true);
