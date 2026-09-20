@@ -5,10 +5,18 @@ const dotenv = require('dotenv').config();
 const cors = require('cors')
 const port = 3001;
 const app = express();
-app.use(cors({ //configuring cors to allow requests from frontend
-    origin: ['http://localhost:5173', 'https://razorpay-payment-project.onrender.com'],
-    credentials: true,
-    methods: ['GET','POST']
+app.use(cors({
+    origin: (origin, callback) => {
+        const allowedOrigins = [
+            'http://localhost:5173',
+            'https://razorpay-payment-project.onrender.com'
+        ];
+        if (!origin || allowedOrigins.includes(origin) || /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)) {
+            return callback(null, true);
+        }
+        return callback(new Error('Not allowed by CORS'));
+    },
+    credentials: true
 }))
 mongoose.connect(process.env.MONGODB_CONN_STR)
 
